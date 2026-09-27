@@ -1,0 +1,106 @@
+<!DOCTYPE html>
+<html lang="fr">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <title>Chat IA</title>
+  <link rel="stylesheet" href="style.css" />
+  <!-- Marked.js pour le rendu Markdown -->
+  <script src="https://cdn.jsdelivr.net/npm/marked/marked.min.js"></script>
+  <!-- Highlight.js pour la coloration syntaxique du code -->
+  <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/highlight.js/11.9.0/styles/github-dark.min.css" />
+  <script src="https://cdnjs.cloudflare.com/ajax/libs/highlight.js/11.9.0/highlight.min.js"></script>
+</head>
+<body>
+
+  <!-- ── Sidebar ── -->
+  <aside class="sidebar" id="sidebar">
+    <div class="sidebar-header">
+      <span class="logo">⚡ Chat IA</span>
+      <button class="btn-icon" id="btn-new-chat" title="Nouvelle conversation">✏️</button>
+    </div>
+
+    <!-- Clé API -->
+    <div class="api-section">
+      <label>Clé API Groq</label>
+      <div class="api-input-wrap">
+        <input type="password" id="api-key" placeholder="gsk_..." />
+        <button class="btn-save-key" id="btn-save-key">Sauver</button>
+      </div>
+      <a href="https://console.groq.com/keys" target="_blank" class="get-key-link">→ Obtenir une clé gratuite</a>
+    </div>
+
+    <!-- Choix du modèle -->
+    <div class="model-section">
+      <label>Modèle IA</label>
+      <select id="model-select">
+        <optgroup label="⚡ Les plus rapides">
+          <option value="openai/gpt-oss-20b">GPT OSS 20B — Ultra rapide ⚡ (1000 t/s)</option>
+          <option value="llama-3.1-8b-instant">Llama 3.1 8B — Ultra rapide ⚡ (560 t/s)</option>
+        </optgroup>
+        <optgroup label="🧠 Les plus puissants">
+          <option value="openai/gpt-oss-120b">GPT OSS 120B — Très puissant (500 t/s)</option>
+          <option value="llama-3.3-70b-versatile">Llama 3.3 70B — Puissant (280 t/s)</option>
+        </optgroup>
+        <optgroup label="🌟 Autres">
+          <option value="qwen/qwen3.8-27b">Qwen 3.8 27B — Alibaba (450 t/s)</option>
+        </optgroup>
+      </select>
+      <div class="model-info" id="model-info">Contexte : 128k tokens • Gratuit</div>
+    </div>
+
+    <!-- Historique des conversations -->
+    <div class="history-section">
+      <label>Conversations</label>
+      <div class="history-list" id="history-list"></div>
+    </div>
+
+    <div class="sidebar-footer">
+      <button class="btn-clear-all" id="btn-clear-all">🗑️ Tout effacer</button>
+    </div>
+  </aside>
+
+  <!-- ── Main ── -->
+  <main class="main">
+
+    <!-- Header -->
+    <header class="topbar">
+      <button class="btn-icon btn-toggle-sidebar" id="btn-toggle-sidebar">☰</button>
+      <span class="current-model" id="current-model-label">Llama 3.3 70B</span>
+      <button class="btn-icon" id="btn-clear-chat" title="Vider le chat">🗑️</button>
+    </header>
+
+    <!-- Zone de messages -->
+    <div class="messages-wrap" id="messages-wrap">
+      <div class="welcome" id="welcome">
+        <div class="welcome-icon">⚡</div>
+        <h1>Chat IA</h1>
+        <p>Entre ta clé API Groq et commence à discuter.<br/>Choisis ton modèle dans le panneau de gauche.</p>
+        <a href="https://console.groq.com/keys" target="_blank" class="btn-get-key">Obtenir une clé gratuite →</a>
+      </div>
+      <div id="messages"></div>
+    </div>
+
+    <!-- Zone de saisie -->
+    <div class="input-area">
+      <div class="input-wrap">
+        <textarea
+          id="user-input"
+          placeholder="Envoie un message... (Entrée pour envoyer, Maj+Entrée pour saut de ligne)"
+          rows="1"
+        ></textarea>
+        <button class="btn-send" id="btn-send" title="Envoyer">
+          <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2">
+            <line x1="22" y1="2" x2="11" y2="13"></line>
+            <polygon points="22 2 15 22 11 13 2 9 22 2"></polygon>
+          </svg>
+        </button>
+      </div>
+      <div class="input-footer">Les réponses sont générées par IA et peuvent contenir des erreurs.</div>
+    </div>
+
+  </main>
+
+  <script src="app.js"></script>
+</body>
+</html>
