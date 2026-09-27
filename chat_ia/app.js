@@ -406,4 +406,15 @@ function showToast(msg, type = "") {
 }
 
 // ── Lancement ──
-init();
+function initApp() {
+  init();
+}
+
+// Si pas de Firebase (test local sans auth), lancer quand même
+if (document.readyState === 'loading') {
+  document.addEventListener('DOMContentLoaded', () => {
+    if (typeof window._firebaseAuth === 'undefined') initApp();
+  });
+} else {
+  if (typeof window._firebaseAuth === 'undefined') initApp();
+}
